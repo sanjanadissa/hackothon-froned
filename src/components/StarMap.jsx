@@ -398,6 +398,9 @@ export default function StarMap({
       await sleep(200);
       emit(`📦 Packet created at ${route[0]}`, 'green');
       emit(`🔭 Routing path calculated`, 'white');
+      if (animationData.security) {
+        emit(`🔒 E2EE XOR-SHA256 Cipher Encrypted`, 'green');
+      }
       setPhase({ phase: 'Inside Source', step: 0, total: 5 });
 
       // Parse hopLog for structured steps
@@ -494,6 +497,10 @@ export default function StarMap({
       if (!cancelled) {
         const dest = route[route.length - 1];
         setFlashPlanet(dest);
+        if (animationData.security) {
+          emit(`🔓 Ciphertext Decrypted`, 'green');
+          emit(`✅ SHA-256 Signature Valid`, 'green');
+        }
         emit(`✅ Delivered to ${dest}`, 'green');
         setPhase({ phase: 'Inside Destination', step: 4, total: 5 });
         setDelivered(true);

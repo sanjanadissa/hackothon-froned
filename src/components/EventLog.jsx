@@ -12,8 +12,8 @@ export default function EventLog({ events }) {
   const getColor = (event) => {
     if (!event) return 'white';
     const msg = event.msg || '';
-    if (msg.includes('✅') || msg.includes('📡') || msg.includes('🏭')) return '#10b981';
-    if (msg.includes('🚀') || msg.includes('📡')) return '#00d4ff';
+    if (msg.includes('✅') || msg.includes('📡') || msg.includes('🏭') || msg.includes('🔒') || msg.includes('🔓')) return '#10b981';
+    if (msg.includes('🚀')) return '#00d4ff';
     return '#e8e6f0';
   };
 

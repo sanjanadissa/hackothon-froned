@@ -102,6 +102,14 @@ export default function AnalyticsSection({ packetResult, eventLog }) {
             <h3 className="ac-title">📦 Delivery Summary</h3>
             <div className="stats-list">
               <div className="stat-row"><span>Status</span> <span style={{color: "var(--success)"}}>DELIVERED</span></div>
+              {packetResult.security && (
+                <div className="stat-row">
+                  <span>Security</span> 
+                  <span style={{ backgroundColor: 'var(--success)', color: '#0f172a', padding: '2px 6px', borderRadius: '4px', fontSize: '11px', fontWeight: 'bold' }}>
+                    E2EE + SHA-256 VERIFIED
+                  </span>
+                </div>
+              )}
               <div className="stat-row"><span>Original Message</span> <span>{packetResult.message}</span></div>
               <div className="stat-row"><span>Delivered Message</span> <span>{packetResult.payload}</span></div>
               <div className="stat-row"><span>Route Taken</span> <span>{packetResult.route?.join(' → ')}</span></div>

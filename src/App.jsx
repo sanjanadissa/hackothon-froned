@@ -124,6 +124,7 @@ export default function App() {
       route: data.route,
       hopLog: data.hop_log,
       startTime: Date.now(),
+      security: data.security,
     });
   }, [selectedOrigin, selectedDestination, message]);
 
