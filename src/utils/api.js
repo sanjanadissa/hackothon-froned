@@ -3,11 +3,18 @@ const API_BASE = '/api';
 async function request(path, options = {}) {
   try {
     const res = await fetch(`${API_BASE}${path}`, {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'X-Relic-Api-Key': 'RELIC-RING-SECURE-26'
+      },
       ...options,
     });
     const data = await res.json();
-    if (!res.ok) return { data: null, error: data.error || data.detail || 'Request failed' };
+    if (!res.ok) {
+      let errStr = data.error || data.detail;
+      if (Array.isArray(errStr)) errStr = errStr.map(e => e.msg || JSON.stringify(e)).join(', ');
+      return { data: null, error: errStr || 'Request failed' };
+    }
     return { data, error: null };
   } catch (err) {
     return { data: null, error: err.message };
