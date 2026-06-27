@@ -5,6 +5,7 @@ import MiniPlanetDiagram from './components/MiniPlanetDiagram';
 import PacketPhaseBar from './components/PacketPhaseBar';
 import EventLog from './components/EventLog';
 import AnalyticsSection from './components/AnalyticsSection';
+import InteractiveStarBackground from './components/InteractiveStarBackground';
 import './App.css';
 
 const PLANET_COLORS = {
@@ -187,6 +188,7 @@ export default function App() {
 
   return (
     <div className="zeta-master">
+      <InteractiveStarBackground />
       <div className="grid-pinned-top">
         {/* ═══ HEADER BAR ═══════════════════════════════════════ */}
         <header className="zeta-header">

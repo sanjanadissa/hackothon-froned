@@ -12,22 +12,6 @@ const PLANET_LIGHT = {
 
 const PADDING = 140;
 
-function useStarPositions(count = 200) {
-  return useMemo(() => {
-    const stars = [];
-    for (let i = 0; i < count; i++) {
-      stars.push({
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        r: Math.random() * 1.0 + 0.5,
-        opacity: Math.random() * 0.5 + 0.1,
-        phase: Math.random() * Math.PI * 2,
-      });
-    }
-    return stars;
-  }, []);
-}
-
 function computeLayout(nodes, width, height) {
   if (!nodes || nodes.length === 0) return { positions: {}, xMin: 0, xMax: 1, yMin: 0, yMax: 1 };
   const xs = nodes.map(n => n.x);
@@ -224,7 +208,6 @@ export default function StarMap({
 }) {
   const containerRef = useRef(null);
   const [size, setSize] = useState({ w: 800, h: 600 });
-  const stars = useStarPositions(200);
   const animRef = useRef(null);
   const animStateRef = useRef(null);
 
@@ -573,28 +556,6 @@ export default function StarMap({
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setTooltipPlanet(null)}
       >
-        {/* ── Star field ── */}
-        <g pointerEvents="none">
-          {stars.map((s, i) => (
-            <circle
-              key={i}
-              cx={`${s.x}%`}
-              cy={`${s.y}%`}
-              r={s.r}
-              fill="white"
-              opacity={s.opacity}
-            >
-              <animate
-                attributeName="opacity"
-                values={`${s.opacity};${Math.min(0.9, s.opacity + 0.3)};${s.opacity}`}
-                dur={`${2 + Math.random() * 3}s`}
-                begin={`${s.phase}s`}
-                repeatCount="indefinite"
-              />
-            </circle>
-          ))}
-        </g>
-
         {/* ── All link lines ── */}
         <g pointerEvents="none">
           {links.map((link, i) => {
